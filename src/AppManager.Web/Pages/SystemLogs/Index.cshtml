@@ -1,0 +1,30 @@
+@page
+@model AppManager.Web.Pages.SystemLogs.IndexModel
+@using Microsoft.Extensions.Localization
+@using AppManager.Localization
+@inject IStringLocalizer<AppManagerResource> L
+
+@section scripts { <abp-script src="/Pages/SystemLogs/Index.js" /> }
+
+<abp-card>
+    <abp-card-header><abp-card-title>@L["SystemLogs:Title"]</abp-card-title></abp-card-header>
+    <abp-card-body>
+        <abp-row class="mb-3">
+            <abp-column size-md="_2">
+                <select id="LevelFilter" class="form-select">
+                    <option value="">@L["SystemLogs:AllLevels"]</option>
+                    <option value="Error">Error</option>
+                    <option value="Warning">Warning</option>
+                    <option value="Information">Information</option>
+                    <option value="Debug">Debug</option>
+                </select>
+            </abp-column>
+            <abp-column size-md="_4">
+                <input id="KeywordFilter" class="form-control" placeholder="@L["SystemLogs:KeywordSearch"]" />
+            </abp-column>
+        </abp-row>
+        <abp-table striped-rows="true" id="SystemLogsTable" class="nowrap">
+            <thead><tr><th>@L["SystemLogs:Timestamp"]</th><th>@L["SystemLogs:Level"]</th><th>@L["SystemLogs:Message"]</th><th>@L["SystemLogs:SourceContext"]</th></tr></thead>
+        </abp-table>
+    </abp-card-body>
+</abp-card>

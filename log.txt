@@ -1,0 +1,31 @@
+1. 该项目需要通过abp cli 工具创建
+    - 你可以执行abp -h 查询信息
+    - 包含测试框架，与测试库
+2. 采用Sqlserver作为数据存储
+3. 采用OIDC协议Token进行身份认证
+    - 开发环境下采用本地简单的登录 - 本地登录越简单越好
+    - 生成环境集成到统一的SSO单点登录平台
+4. 项目需要采用严格的权限控制，权限信息需要存储到数据库表中
+
+
+1. 已经安装了ABP CLI，architecture.md 去掉安装ABP CLI
+2. 根据 architecture.md 、requirements.md 文档，给我一个份ui原型图
+
+
+architecture.md 与 architecture.md 、ui-prototype.md更新
+1. 系统使用Serilog日志
+    - 支持文本存储
+    - 支持sqlserver数据存储
+2. UI界面中加入Serilog日志菜单及界面
+3. UI界面中加入Audit审计日志菜单及界面
+
+
+1. 加入IIS 站点备份与还原
+2. 加入service 站点备份与还原
+3. 更新 architecture.md 与 architecture.md 、ui-prototype.md更新
+4. 现在不需要任何编码
+
+1.这个项目我全权负责
+2.需要编写程序来帮我自动执行升级、备份、还原，以及部分文档性管理
+3.我需要一个更加统一的工具来实现站点、service的管理工作
+4.因为现在站点、service越来越多了，需要管理工具来辅助管理

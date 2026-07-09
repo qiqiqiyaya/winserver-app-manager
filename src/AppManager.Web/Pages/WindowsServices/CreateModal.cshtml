@@ -1,0 +1,16 @@
+@page
+@model AppManager.Web.Pages.WindowsServices.CreateModalModel
+@using Microsoft.Extensions.Localization
+@using AppManager.Localization
+@inject IStringLocalizer<AppManagerResource> L
+
+<abp-modal size="Large">
+    <abp-modal-header title="@L["WindowsServices:Create"].Value"></abp-modal-header>
+    <abp-modal-body>
+        <abp-dynamic-form abp-model="Input" asp-page="/WindowsServices/CreateModal">
+            <abp-form-content />
+            <abp-button button-type="Primary" type="submit" text="@L["Save"].Value" />
+            <abp-button button-type="Secondary" type="button" data-bs-dismiss="modal" text="@L["Cancel"].Value" />
+        </abp-dynamic-form>
+    </abp-modal-body>
+</abp-modal>

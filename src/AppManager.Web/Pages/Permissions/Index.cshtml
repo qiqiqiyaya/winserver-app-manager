@@ -1,0 +1,32 @@
+@page
+@model AppManager.Web.Pages.Permissions.IndexModel
+@using Microsoft.Extensions.Localization
+@using AppManager.Localization
+@inject IStringLocalizer<AppManagerResource> L
+
+@section scripts { <abp-script src="/Pages/Permissions/Index.js" /> }
+
+<abp-card>
+    <abp-card-header><abp-card-title>@L["Permissions:Title"]</abp-card-title></abp-card-header>
+    <abp-card-body>
+        <form method="get" asp-page="/Permissions/Index">
+            <abp-row class="mb-3">
+                <abp-column size-md="_3">
+                    <select name="SelectedRole" asp-items="Model.Roles" class="form-select" id="RoleSelect">
+                        <option value="">@L["Permissions:SelectRole"]</option>
+                    </select>
+                </abp-column>
+                <abp-column size-md="_2">
+                    <abp-button button-type="Primary" type="submit" text="@L["Permissions:Load"].Value" />
+                </abp-column>
+            </abp-row>
+        </form>
+
+        @if (!string.IsNullOrEmpty(Model.SelectedRole))
+        {
+            <div id="PermissionPanel">
+                <p class="text-muted">@L["Permissions:LoadingPermissions"] @Model.SelectedRole ...</p>
+            </div>
+        }
+    </abp-card-body>
+</abp-card>

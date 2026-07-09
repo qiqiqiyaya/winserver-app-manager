@@ -1,0 +1,42 @@
+@page
+@model AppManager.Web.Pages.IisSites.IndexModel
+@using AppManager.IisSites
+@using Microsoft.Extensions.Localization
+@using AppManager.Localization
+@inject IStringLocalizer<AppManagerResource> L
+
+@section scripts {
+    <abp-script src="/Pages/IisSites/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["IisSites:Title"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                <abp-button id="CreateSiteButton" text="@L["IisSites:Create"].Value" icon="plus" button-type="Primary" />
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row class="mb-3">
+            <abp-column size-md="_4">
+                <input id="FilterInput" class="form-control" placeholder="@L["IisSites:SearchPlaceholder"]" />
+            </abp-column>
+        </abp-row>
+        <abp-table striped-rows="true" id="IisSitesTable" class="nowrap">
+            <thead>
+                <tr>
+                    <th>@L["IisSites:SiteName"]</th>
+                    <th>@L["IisSites:PhysicalPath"]</th>
+                    <th>@L["IisSites:Status"]</th>
+                    <th>@L["IisSites:Port"]</th>
+                    <th>@L["IisSites:AppPoolName"]</th>
+                    <th>@L["Actions"]</th>
+                </tr>
+            </thead>
+        </abp-table>
+    </abp-card-body>
+</abp-card>

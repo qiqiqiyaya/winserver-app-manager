@@ -1,0 +1,127 @@
+@page
+@model AppManager.Web.Pages.IisSites.ManageModel
+@using Microsoft.Extensions.Localization
+@using AppManager.Localization
+@inject IStringLocalizer<AppManagerResource> L
+
+<abp-card>
+    <abp-card-header>
+        <abp-card-title>@L["IisSites:Manage"] — @Model.Site.SiteName</abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-tabs>
+            <abp-tab title="@L["IisSites:Bindings"]">
+                <h5 class="mt-2">@L["IisSites:CurrentBindings"]</h5>
+                <abp-table>
+                    <thead><tr><th>@L["IisSites:Protocol"]</th><th>@L["IisSites:IpAddress"]</th><th>@L["IisSites:Port"]</th><th>@L["IisSites:HostName"]</th><th>@L["Actions"]</th></tr></thead>
+                    <tbody>
+                        @foreach (var b in Model.Bindings)
+                        {
+                            <tr>
+                                <td>@b.Protocol</td><td>@b.IpAddress</td><td>@b.Port</td><td>@b.HostName</td>
+                                <td>
+                                    <form method="post" asp-page-handler="RemoveBinding" asp-route-protocol="@b.Protocol" asp-route-ip="@b.IpAddress" asp-route-port="@b.Port" asp-route-host="@b.HostName">
+                                        <abp-button button-type="Danger" size="Small" type="submit" text="@L["Delete"].Value" />
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </abp-table>
+                <h5>@L["IisSites:AddBinding"]</h5>
+                <form method="post" asp-page-handler="AddBinding">
+                    <abp-row>
+                        <abp-column><input asp-for="NewBinding.Protocol" class="form-control" placeholder="@L["IisSites:Protocol"]" /></abp-column>
+                        <abp-column><input asp-for="NewBinding.IpAddress" class="form-control" placeholder="@L["IisSites:IpAddress"]" /></abp-column>
+                        <abp-column><input asp-for="NewBinding.Port" class="form-control" type="number" placeholder="@L["IisSites:Port"]" /></abp-column>
+                        <abp-column><input asp-for="NewBinding.HostName" class="form-control" placeholder="@L["IisSites:HostName"]" /></abp-column>
+                        <abp-column><abp-button button-type="Primary" type="submit" text="@L["IisSites:Add"].Value" /></abp-column>
+                    </abp-row>
+                </form>
+            </abp-tab>
+            <abp-tab title="@L["IisSites:AppPool"]">
+                <h5 class="mt-2">@L["IisSites:AppPoolConfig"]</h5>
+                <form method="post" asp-page-handler="UpdateAppPool">
+                    <div class="mb-2">
+                        <label>@L["IisSites:ClrVersion"]</label>
+                        <input asp-for="EditAppPool.ClrVersion" class="form-control" value="@Model.AppPoolConfig.ClrVersion" />
+                    </div>
+                    <div class="mb-2">
+                        <label>@L["IisSites:IdleTimeoutMinutes"]</label>
+                        <input asp-for="EditAppPool.IdleTimeoutMinutes" class="form-control" type="number" value="@Model.AppPoolConfig.IdleTimeoutMinutes" />
+                    </div>
+                    <div class="mb-2">
+                        <label>@L["IisSites:MaxWorkerProcesses"]</label>
+                        <input asp-for="EditAppPool.MaxWorkerProcesses" class="form-control" type="number" value="@Model.AppPoolConfig.MaxWorkerProcesses" />
+                    </div>
+                    <abp-button button-type="Primary" type="submit" text="@L["Save"].Value" />
+                </form>
+            </abp-tab>
+            <abp-tab title="@L["IisSites:SubApplications"]">
+                <h5 class="mt-2">@L["IisSites:CurrentSubApps"]</h5>
+                <abp-table>
+                    <thead><tr><th>@L["IisSites:Alias"]</th><th>@L["IisSites:PhysicalPath"]</th><th>@L["IisSites:AppPoolName"]</th><th>@L["Actions"]</th></tr></thead>
+                    <tbody>
+                        @foreach (var s in Model.SubApplications)
+                        {
+                            <tr><td>@s.Alias</td><td>@s.PhysicalPath</td><td>@s.AppPoolName</td>
+                                <td>
+                                    <form method="post" asp-page-handler="RemoveSubApp" asp-route-alias="@s.Alias">
+                                        <abp-button button-type="Danger" size="Small" type="submit" text="@L["Delete"].Value" />
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </abp-table>
+                <h5>@L["IisSites:AddSubApp"]</h5>
+                <form method="post" asp-page-handler="AddSubApp">
+                    <abp-row>
+                        <abp-column><input asp-for="NewSubApp.Alias" class="form-control" placeholder="@L["IisSites:Alias"]" /></abp-column>
+                        <abp-column><input asp-for="NewSubApp.PhysicalPath" class="form-control" placeholder="@L["IisSites:PhysicalPath"]" /></abp-column>
+                        <abp-column><input asp-for="NewSubApp.AppPoolName" class="form-control" placeholder="@L["IisSites:AppPoolName"]" /></abp-column>
+                        <abp-column><abp-button button-type="Primary" type="submit" text="@L["IisSites:Add"].Value" /></abp-column>
+                    </abp-row>
+                </form>
+            </abp-tab>
+            <abp-tab title="@L["IisSites:VirtualDirectories"]">
+                <h5 class="mt-2">@L["IisSites:CurrentVDirs"]</h5>
+                <abp-table>
+                    <thead><tr><th>@L["IisSites:Alias"]</th><th>@L["IisSites:PhysicalPath"]</th><th>@L["Actions"]</th></tr></thead>
+                    <tbody>
+                        @foreach (var v in Model.VirtualDirectories)
+                        {
+                            <tr><td>@v.Alias</td><td>@v.PhysicalPath</td>
+                                <td>
+                                    <form method="post" asp-page-handler="RemoveVDir" asp-route-alias="@v.Alias">
+                                        <abp-button button-type="Danger" size="Small" type="submit" text="@L["Delete"].Value" />
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </abp-table>
+                <h5>@L["IisSites:AddVDir"]</h5>
+                <form method="post" asp-page-handler="AddVDir">
+                    <abp-row>
+                        <abp-column><input asp-for="NewVDir.Alias" class="form-control" placeholder="@L["IisSites:Alias"]" /></abp-column>
+                        <abp-column><input asp-for="NewVDir.PhysicalPath" class="form-control" placeholder="@L["IisSites:PhysicalPath"]" /></abp-column>
+                        <abp-column><abp-button button-type="Primary" type="submit" text="@L["IisSites:Add"].Value" /></abp-column>
+                    </abp-row>
+                </form>
+            </abp-tab>
+            <abp-tab title="@L["IisSites:NtfsPermissions"]">
+                <h5 class="mt-2">@L["IisSites:CurrentPermissions"]</h5>
+                <abp-table>
+                    <thead><tr><th>@L["IisSites:Identity"]</th><th>@L["IisSites:AccessRights"]</th></tr></thead>
+                    <tbody>
+                        @foreach (var p in Model.NtfsPermissions)
+                        {
+                            <tr><td>@p.Identity</td><td>@p.AccessRights</td></tr>
+                        }
+                    </tbody>
+                </abp-table>
+            </abp-tab>
+        </abp-tabs>
+    </abp-card-body>
+</abp-card>

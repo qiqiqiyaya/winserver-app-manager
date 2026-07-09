@@ -1,0 +1,26 @@
+@page
+@model AppManager.Web.Pages.WindowsServices.IndexModel
+@using Microsoft.Extensions.Localization
+@using AppManager.Localization
+@inject IStringLocalizer<AppManagerResource> L
+
+@section scripts { <abp-script src="/Pages/WindowsServices/Index.js" /> }
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6"><abp-card-title>@L["WindowsServices:Title"]</abp-card-title></abp-column>
+            <abp-column size-md="_6" class="text-end">
+                <abp-button id="CreateServiceButton" text="@L["WindowsServices:Create"].Value" icon="plus" button-type="Primary" />
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row class="mb-3">
+            <abp-column size-md="_4"><input id="FilterInput" class="form-control" placeholder="@L["WindowsServices:SearchPlaceholder"]" /></abp-column>
+        </abp-row>
+        <abp-table striped-rows="true" id="WindowsServicesTable" class="nowrap">
+            <thead><tr><th>@L["WindowsServices:ServiceName"]</th><th>@L["WindowsServices:DisplayName"]</th><th>@L["WindowsServices:Status"]</th><th>@L["WindowsServices:StartType"]</th><th>@L["WindowsServices:Account"]</th><th>@L["Actions"]</th></tr></thead>
+        </abp-table>
+    </abp-card-body>
+</abp-card>

@@ -1,0 +1,24 @@
+@page
+@model AppManager.Web.Pages.AuditLogs.IndexModel
+@using Microsoft.Extensions.Localization
+@using AppManager.Localization
+@inject IStringLocalizer<AppManagerResource> L
+
+@section scripts { <abp-script src="/Pages/AuditLogs/Index.js" /> }
+
+<abp-card>
+    <abp-card-header><abp-card-title>@L["AuditLogs:Title"]</abp-card-title></abp-card-header>
+    <abp-card-body>
+        <abp-row class="mb-3">
+            <abp-column size-md="_2">
+                <input id="UserFilter" class="form-control" placeholder="@L["AuditLogs:UserFilter"]" />
+            </abp-column>
+            <abp-column size-md="_2">
+                <input id="UrlFilter" class="form-control" placeholder="@L["AuditLogs:UrlFilter"]" />
+            </abp-column>
+        </abp-row>
+        <abp-table striped-rows="true" id="AuditLogsTable" class="nowrap">
+            <thead><tr><th>@L["AuditLogs:Time"]</th><th>@L["AuditLogs:User"]</th><th>@L["AuditLogs:HttpMethod"]</th><th>@L["AuditLogs:Url"]</th><th>@L["AuditLogs:StatusCode"]</th><th>@L["AuditLogs:Duration"]</th><th>@L["Actions"]</th></tr></thead>
+        </abp-table>
+    </abp-card-body>
+</abp-card>
