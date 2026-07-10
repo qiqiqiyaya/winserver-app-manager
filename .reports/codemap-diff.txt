@@ -1,0 +1,26 @@
+# Codemap Generation Report — 2026-07-11
+
+## Summary
+- Codemaps generated: 5 (architecture.md, backend.md, frontend.md, data.md, dependencies.md)
+- No previous codemaps existed — this is the initial generation.
+- No diff comparison needed.
+
+## Files Scanned
+- Source files (src/): 139 .cs/.cshtml files across 7 projects
+- Test files (test/): 28 .cs files across 5 test projects
+- Existing docs: 3 (architecture.md, requirements.md, ui-prototype.md)
+
+## Architecture Notes
+- **Stack**: .NET 8 + ABP Framework 8.3.4 + ASP.NET Core MVC + EF Core + SQL Server
+- **Domain**: IisSite, WindowsService, IisSiteBackup, WindowsServiceBackup (4 entities)
+- **AppServices**: 6 (IisSite, WindowsService, IisSiteBackup, WindowsServiceBackup, SystemLog, AuditLog)
+- **Domain Services**: 4 (IIisManager, IWindowsServiceManager, IIisBackupService, IWindowsServiceBackupService)
+- **Razor Pages**: 13 (5 IIS sites, 3 Windows services, 2 backups, system logs, audit logs, permissions, home)
+- **Permissions**: 20 defined constants
+
+## Staleness Notes
+- `docs/architecture.md` — Already exists, detailed, covers ABP arch. Codemap version is leaner.
+- `docs/requirements.md` — Not scanned.
+- `docs/ui-prototype.md` — Not scanned.
+- SystemLogAppService and AuditLogAppService are stubs (not implemented).
+- Only 1 migration exists (Initial).

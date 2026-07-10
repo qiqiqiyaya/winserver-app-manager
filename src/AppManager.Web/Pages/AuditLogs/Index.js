@@ -2,7 +2,7 @@ $(function () {
     var l = abp.localization.getResource('AppManager');
     var dt = $('#AuditLogsTable').DataTable(abp.libs.datatables.normalizeConfiguration({
         serverSide: true, processing: true, paging: true, ordering: true, searching: false, scrollX: true,
-        ajax: abp.libs.datatables.createAjax(appManager.auditLogs.index.getList),
+        ajax: abp.libs.datatables.createAjax(appManager.application.auditLogs.auditLog.getList),
         columnDefs: [
             { title: l('AuditLogs:Time'), data: 'executionTime', render: function (d) { return d ? new Date(d).toLocaleString() : ''; } },
             { title: l('AuditLogs:User'), data: 'userName' },

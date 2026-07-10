@@ -30,7 +30,7 @@ public class EditModalModel : AppManagerPageModel
             PhysicalPath = site.PhysicalPath,
             Port = site.Port
         };
-        return Partial("_EditModal");
+        return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()

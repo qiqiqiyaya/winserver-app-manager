@@ -2,7 +2,7 @@ $(function () {
     var l = abp.localization.getResource('AppManager');
     var dt = $('#SystemLogsTable').DataTable(abp.libs.datatables.normalizeConfiguration({
         serverSide: true, processing: true, paging: true, ordering: true, searching: false, scrollX: true,
-        ajax: abp.libs.datatables.createAjax(appManager.systemLogs.index.getList),
+        ajax: abp.libs.datatables.createAjax(appManager.application.systemLogs.systemLog.getList),
         columnDefs: [
             { title: l('SystemLogs:Timestamp'), data: 'timeStamp', render: function (d) { return d ? new Date(d).toLocaleString() : ''; } },
             { title: l('SystemLogs:Level'), data: 'level',

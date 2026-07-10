@@ -9,7 +9,7 @@ $(function () {
             searching: false,
             scrollX: true,
             ajax: abp.libs.datatables.createAjax(
-                appManager.iisSites.index.getList
+                appManager.application.iisSites.iisSite.getList
             ),
             columnDefs: [
                 {
@@ -58,14 +58,20 @@ $(function () {
     });
 
     $('#CreateSiteButton').on('click', function () {
-        // TODO: open create modal
+        var createModal = new abp.ModalManager({
+            viewUrl: abp.appPath + 'IisSites/CreateModal'
+        });
+        createModal.onResult(function () {
+            dataTable.ajax.reload();
+        });
+        createModal.open();
     });
 
     $('#IisSitesTable').on('click', '.delete-btn', function () {
         var id = $(this).data('id');
         abp.message.confirm(l('DeleteConfirmation'), function (confirmed) {
             if (confirmed) {
-                appManager.iisSites.index.delete(id).then(function () {
+                appManager.application.iisSites.iisSite.delete(id).then(function () {
                     dataTable.ajax.reload();
                     abp.notify.success(l('DeletedSuccessfully'));
                 });
@@ -75,7 +81,7 @@ $(function () {
 
     $('#IisSitesTable').on('click', '.start-btn', function () {
         var id = $(this).data('id');
-        appManager.iisSites.index.start(id).then(function () {
+        appManager.application.iisSites.iisSite.start(id).then(function () {
             dataTable.ajax.reload();
             abp.notify.success(l('IisSites:Started'));
         });
@@ -83,9 +89,20 @@ $(function () {
 
     $('#IisSitesTable').on('click', '.stop-btn', function () {
         var id = $(this).data('id');
-        appManager.iisSites.index.stop(id).then(function () {
+        appManager.application.iisSites.iisSite.stop(id).then(function () {
             dataTable.ajax.reload();
             abp.notify.success(l('IisSites:Stopped'));
         });
+    });
+
+    $('#IisSitesTable').on('click', '.edit-btn', function () {
+        var id = $(this).data('id');
+        var editModal = new abp.ModalManager({
+            viewUrl: abp.appPath + 'IisSites/EditModal?id=' + id
+        });
+        editModal.onResult(function () {
+            dataTable.ajax.reload();
+        });
+        editModal.open();
     });
 });

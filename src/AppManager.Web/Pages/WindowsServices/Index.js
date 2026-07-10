@@ -2,7 +2,7 @@ $(function () {
     var l = abp.localization.getResource('AppManager');
     var dt = $('#WindowsServicesTable').DataTable(abp.libs.datatables.normalizeConfiguration({
         serverSide: true, processing: true, paging: true, ordering: true, searching: false, scrollX: true,
-        ajax: abp.libs.datatables.createAjax(appManager.windowsServices.index.getList),
+        ajax: abp.libs.datatables.createAjax(appManager.application.windowsServices.windowsService.getList),
         columnDefs: [
             { title: l('WindowsServices:ServiceName'), data: 'serviceName' },
             { title: l('WindowsServices:DisplayName'), data: 'displayName' },
@@ -25,9 +25,9 @@ $(function () {
     $('#FilterInput').on('keyup', function () { dt.search(this.value).draw(); });
     $('#WindowsServicesTable').on('click', '.delete-btn', function () {
         var id = $(this).data('id');
-        abp.message.confirm(l('DeleteConfirmation'), function (c) { if (c) appManager.windowsServices.index.delete(id).then(function () { dt.ajax.reload(); }); });
+        abp.message.confirm(l('DeleteConfirmation'), function (c) { if (c) appManager.application.windowsServices.windowsService.delete(id).then(function () { dt.ajax.reload(); }); });
     });
-    $('#WindowsServicesTable').on('click', '.start-btn', function () { appManager.windowsServices.index.start($(this).data('id')).then(function () { dt.ajax.reload(); }); });
-    $('#WindowsServicesTable').on('click', '.stop-btn', function () { appManager.windowsServices.index.stop($(this).data('id')).then(function () { dt.ajax.reload(); }); });
-    $('#WindowsServicesTable').on('click', '.restart-btn', function () { appManager.windowsServices.index.restart($(this).data('id')).then(function () { dt.ajax.reload(); }); });
+    $('#WindowsServicesTable').on('click', '.start-btn', function () { appManager.application.windowsServices.windowsService.start($(this).data('id')).then(function () { dt.ajax.reload(); }); });
+    $('#WindowsServicesTable').on('click', '.stop-btn', function () { appManager.application.windowsServices.windowsService.stop($(this).data('id')).then(function () { dt.ajax.reload(); }); });
+    $('#WindowsServicesTable').on('click', '.restart-btn', function () { appManager.application.windowsServices.windowsService.restart($(this).data('id')).then(function () { dt.ajax.reload(); }); });
 });

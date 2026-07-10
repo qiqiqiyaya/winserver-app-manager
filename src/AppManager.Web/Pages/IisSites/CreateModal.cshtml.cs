@@ -18,7 +18,7 @@ public class CreateModalModel : AppManagerPageModel
 
     public async Task<IActionResult> OnGetAsync()
     {
-        return Partial("_CreateModal");
+        return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
