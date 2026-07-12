@@ -7,30 +7,30 @@ using Microsoft.Extensions.Logging;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
 
-namespace AppManager.Services;
+namespace AppManager.Backups;
 
 public class WindowsServiceBackupService : IWindowsServiceBackupService, ITransientDependency
 {
     private readonly IWindowsServiceManager _svcMgr;
     private readonly IRepository<WindowsServiceEntity, Guid> _repo;
-    private readonly IRepository<Backups.WindowsServiceBackup, Guid> _backupRepo;
+    private readonly IRepository<WindowsServiceBackup, Guid> _backupRepo;
     private readonly ILogger<WindowsServiceBackupService> _log;
 
     public WindowsServiceBackupService(
         IWindowsServiceManager svcMgr,
         IRepository<WindowsServiceEntity, Guid> repo,
-        IRepository<Backups.WindowsServiceBackup, Guid> backupRepo,
+        IRepository<WindowsServiceBackup, Guid> backupRepo,
         ILogger<WindowsServiceBackupService> log)
     {
         _svcMgr = svcMgr; _repo = repo; _backupRepo = backupRepo; _log = log;
     }
 
-    public async Task<Backups.WindowsServiceBackup> CreateBackupAsync(string serviceName, string? description)
+    public async Task<WindowsServiceBackup> CreateBackupAsync(string serviceName, string? description)
     {
         var svc = await _repo.FindAsync(s => s.ServiceName == serviceName)
             ?? throw new InvalidOperationException($"Service {serviceName} not found");
 
-        var backup = new Backups.WindowsServiceBackup
+        var backup = new WindowsServiceBackup
         {
             ServiceName = svc.ServiceName,
             DisplayName = svc.DisplayName,

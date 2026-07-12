@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -15,6 +16,8 @@ public class CreateIisSiteDto
 
     [Range(1, 65535)]
     public int Port { get; set; } = 80;
+
+    public Guid IisInstanceId { get; set; }
 
     public List<SiteBindingDto> Bindings { get; set; } = new();
     public string? AppPoolName { get; set; }

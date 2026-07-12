@@ -10,6 +10,7 @@
     <abp-modal-body>
         <abp-dynamic-form abp-model="Input" asp-page="/IisSites/CreateModal">
             <abp-form-content />
+            <abp-select asp-for="Input.IisInstanceId" asp-items="Model.InstanceList" label="@L["IisInstances:Name"].Value" />
             <abp-button button-type="Primary" type="submit" text="@L["Save"].Value" />
             <abp-button button-type="Secondary" type="button" data-bs-dismiss="modal" text="@L["Cancel"].Value" />
         </abp-dynamic-form>

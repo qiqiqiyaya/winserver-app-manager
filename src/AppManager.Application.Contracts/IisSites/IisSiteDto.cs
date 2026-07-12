@@ -10,6 +10,8 @@ public class IisSiteDto : EntityDto<Guid>
     public string PhysicalPath { get; set; } = string.Empty;
     public string Status { get; set; } = "Unknown";
     public int? Port { get; set; }
+    public Guid IisInstanceId { get; set; }
+    public string? IisInstanceName { get; set; }
     public List<SiteBindingDto> Bindings { get; set; } = new();
     public string? AppPoolName { get; set; }
     public AppPoolConfigDto? AppPoolConfig { get; set; }

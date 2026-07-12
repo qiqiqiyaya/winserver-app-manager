@@ -1,10 +1,8 @@
-<!-- Generated: 2026-07-11 | Files scanned: 139 | Token estimate: ~950 -->
+<!-- Generated: 2026-07-12 | Files scanned: 698 | Token estimate: ~950 -->
 
 # Backend Architecture
 
-## API Layer (Auto-generated Conventional Controllers)
-
-ABP Auto API maps `IApplicationService` interfaces to REST endpoints automatically.
+## API Layer (ABP Auto Conventional Controllers)
 
 ```
 GET    /api/app/iis-site               → IIisSiteAppService.GetListAsync
@@ -60,41 +58,46 @@ GET    /api/app/audit-log/{id}     → IAuditLogAppService.GetDetailAsync
 
 ## Service → Repository Mapping
 
-| AppService | Domain Service | Repository |
+| AppService (Application/) | Domain Service (Domain/) | Repository |
 |---|---|---|
-| `IisSiteAppService` | `IIisManager` (Microsoft.Web.Administration) | `IRepository<IisSite, Guid>` |
-| `WindowsServiceAppService` | `IWindowsServiceManager` (sc.exe/ServiceController) | `IRepository<WindowsService, Guid>` |
-| `IisSiteBackupAppService` | `IIisBackupService` | `IRepository<IisSiteBackup, Guid>` |
-| `WindowsServiceBackupAppService` | `IWindowsServiceBackupService` | `IRepository<WindowsServiceBackup, Guid>` |
-| `SystemLogAppService` | (not implemented) | — |
-| `AuditLogAppService` | (not implemented) | — |
+| `IisSites/IisSiteAppService` | `IisSite/IIisManager` (Microsoft.Web.Administration) | `IRepository<IisSite, Guid>` |
+| `WindowsServices/WindowsServiceAppService` | `WindowsService/IWindowsServiceManager` (sc.exe/ServiceController) | `IRepository<WindowsService, Guid>` |
+| `Backups/IisSiteBackupAppService` | `Backups/IIisBackupService` | `IRepository<IisSiteBackup, Guid>` |
+| `Backups/WindowsServiceBackupAppService` | `Backups/IWindowsServiceBackupService` | `IRepository<WindowsServiceBackup, Guid>` |
+| `SystemLogs/SystemLogAppService` | — | `IRepository<SerilogLog, long>` |
+| `AuditLogs/AuditLogAppService` | — | `IRepository<AuditLog, Guid>` |
+
+## Error Handling Flow
+
+```
+Domain Service 抛异常
+  → AppService catch → Logger.LogWarning + throw new BusinessException(errorCode, details: ex.Message)
+    → ABP AbpExceptionFilter → JSON { error: { message, details, code }, _AbpErrorFormat: true }
+      → 客户端 abp.ajax → showError() → alert 或 notification
+```
 
 ## Middleware Pipeline (Web)
 
 ```
 UseDeveloperExceptionPage / UseErrorPage
-  → UseAbpRequestLocalization
-    → UseCorrelationId
-      → UseStaticFiles
-        → UseRouting
-          → UseAuthentication (OpenIddict)
-            → UseMultiTenancy
-              → UseUnitOfWork
-                → UseDynamicClaims
-                  → UseAuthorization
-                    → UseSwagger
-                      → UseAuditing
-                        → UseConfiguredEndpoints
+  → UseAbpRequestLocalization → UseCorrelationId → UseStaticFiles
+    → UseRouting → UseAuthentication (OpenIddict) → UseAbpOpenIddictValidation
+      → UseMultiTenancy → UseUnitOfWork → UseDynamicClaims → UseAuthorization
+        → UseSwagger → UseAbpSwaggerUI → UseAuditing → UseAbpSerilogEnrichers
+          → UseConfiguredEndpoints
 ```
 
 ## Key Files
 
-| File | Purpose | Lines |
+| File | Purpose | Namespace |
 |---|---|---|
-| `src/AppManager.Application/IisSites/IisSiteAppService.cs` | IIS CRUD + management | 241 |
-| `src/AppManager.Application/WindowsServices/WindowsServiceAppService.cs` | Service CRUD + lifecycle | 120 |
-| `src/AppManager.Application/Services/WindowsServiceManager.cs` | sc.exe wrapper | 152 |
-| `src/AppManager.Web/AppManagerWebModule.cs` | Web startup, pipeline config | 240 |
-| `src/AppManager.Web/Program.cs` | Entry point, Serilog | 56 |
-| `src/AppManager.Application.Contracts/Permissions/AppManagerPermissions.cs` | 20 permission constants | 50 |
-| `src/AppManager.Domain/Services/IIisManager.cs` | IIS management interface | 29 |
+| `src/AppManager.Application/IisSites/IisSiteAppService.cs` | IIS CRUD + management (编排层) | `AppManager.Application.IisSites` |
+| `src/AppManager.Application/WindowsServices/WindowsServiceAppService.cs` | Service CRUD + lifecycle | `AppManager.Application.WindowsServices` |
+| `src/AppManager.Domain/IisSite/IisManager.cs` | IIS API 包装 (ServerManager) | `AppManager.IisSite` |
+| `src/AppManager.Domain/IisSite/IIisManager.cs` | IIS 领域服务接口 | `AppManager.IisSite` |
+| `src/AppManager.Domain/WindowsService/WindowsServiceManager.cs` | sc.exe + ServiceController 包装 | `AppManager.WindowsService` |
+| `src/AppManager.Domain/WindowsService/IWindowsServiceManager.cs` | 服务领域服务接口 | `AppManager.WindowsService` |
+| `src/AppManager.Domain/Backups/IisBackupService.cs` | IIS 备份/还原逻辑 | `AppManager.Backups` |
+| `src/AppManager.Domain/Backups/WindowsServiceBackupService.cs` | 服务备份/还原逻辑 | `AppManager.Backups` |
+| `src/AppManager.Web/AppManagerWebModule.cs` | Web startup, middleware pipeline | `AppManager.Web` |
+| `src/AppManager.Web/Program.cs` | Entry point, Serilog config | — |

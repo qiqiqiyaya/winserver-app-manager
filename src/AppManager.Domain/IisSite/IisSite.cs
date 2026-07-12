@@ -15,4 +15,10 @@ public class IisSite : FullAuditedAggregateRoot<Guid>
     public string? SubApplicationsJson { get; set; }
     public string? VirtualDirectoriesJson { get; set; }
     public string? NtfsPermissionsJson { get; set; }
+
+    /// <summary>
+    /// 所属 IIS 实例
+    /// </summary>
+    public Guid IisInstanceId { get; set; }
+    public IisInstance? IisInstance { get; set; }
 }

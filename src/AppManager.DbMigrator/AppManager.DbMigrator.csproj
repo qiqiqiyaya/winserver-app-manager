@@ -31,6 +31,10 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Autofac" Version="8.3.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <ProjectReference Include="..\AppManager.Application.Contracts\AppManager.Application.Contracts.csproj" />
     <ProjectReference Include="..\AppManager.EntityFrameworkCore\AppManager.EntityFrameworkCore.csproj" />
   </ItemGroup>

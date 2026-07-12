@@ -35,15 +35,19 @@ public class AppManagerMenuContributor : IMenuContributor
         );
 
         // IIS site management
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
-                "IisSites",
-                l["Menu:IisSites"],
-                "~/IisSites",
-                icon: "fas fa-globe",
-                order: 1
-            )
+        var iisGroup = new ApplicationMenuItem(
+            "IisSites",
+            l["Menu:IisSites"],
+            "~/IisSites",
+            icon: "fas fa-globe",
+            order: 1
         );
+        iisGroup.AddItem(new ApplicationMenuItem(
+            "IisInstances",
+            l["Menu:IisInstances"],
+            "~/IisInstances"
+        ));
+        context.Menu.AddItem(iisGroup);
 
         // Windows service management
         context.Menu.AddItem(

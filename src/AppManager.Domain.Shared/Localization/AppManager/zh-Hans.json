@@ -8,6 +8,7 @@
     "Menu:IisSites": "IIS 站点",
     "Menu:IisSiteList": "站点管理",
     "Menu:IisSiteBackup": "备份与还原",
+    "Menu:IisInstances": "IIS 实例管理",
     "Menu:WindowsServices": "Windows 服务",
     "Menu:WindowsServiceList": "服务管理",
     "Menu:WindowsServiceBackup": "备份与还原",
@@ -26,6 +27,10 @@
     "Permission:IisSites.ManagePermissions": "管理 NTFS 权限",
     "Permission:IisSites.Backup": "备份站点",
     "Permission:IisSites.Restore": "还原站点",
+    "Permission:IisInstances": "IIS 实例管理",
+    "Permission:IisInstances.Create": "创建实例",
+    "Permission:IisInstances.Edit": "编辑实例",
+    "Permission:IisInstances.Delete": "删除实例",
     "Permission:WindowsServices": "Windows 服务管理",
     "Permission:WindowsServices.Create": "创建服务",
     "Permission:WindowsServices.Edit": "编辑服务",
@@ -99,6 +104,12 @@
     "CreateAsNew": "创建为新站点",
     "RestoreSnapshotFirst": "还原前自动创建当前状态快照（推荐）",
     "RestoreWarning": "警告：还原操作将修改 IIS/Windows 服务配置，此操作不可撤销。建议在还原前创建当前状态备份。",
-    "ConfirmRestore": "确认还原"
+    "ConfirmRestore": "确认还原",
+    "IisInstances:Title": "IIS 实例管理",
+    "IisInstances:Name": "实例名称",
+    "IisInstances:ConfigPath": "配置文件路径",
+    "IisInstances:Status": "状态",
+    "IisInstances:Create": "创建实例",
+    "IisInstances:SystemDefault": "系统默认"
   }
 }

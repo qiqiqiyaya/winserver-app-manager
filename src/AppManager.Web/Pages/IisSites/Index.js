@@ -9,7 +9,10 @@ $(function () {
             searching: false,
             scrollX: true,
             ajax: abp.libs.datatables.createAjax(
-                appManager.application.iisSites.iisSite.getList
+                appManager.application.iisSites.iisSite.getList,
+                function () {
+                    return { iisInstanceId: $('#InstanceFilter').val() || null };
+                }
             ),
             columnDefs: [
                 {
@@ -53,6 +56,10 @@ $(function () {
         })
     );
 
+    $('#InstanceFilter').on('change', function () {
+        dataTable.ajax.reload();
+    });
+
     $('#FilterInput').on('keyup', function () {
         dataTable.search(this.value).draw();
     });
@@ -74,6 +81,8 @@ $(function () {
                 appManager.application.iisSites.iisSite.delete(id).then(function () {
                     dataTable.ajax.reload();
                     abp.notify.success(l('DeletedSuccessfully'));
+                }).catch(function () {
+                    dataTable.ajax.reload();
                 });
             }
         });
@@ -84,6 +93,8 @@ $(function () {
         appManager.application.iisSites.iisSite.start(id).then(function () {
             dataTable.ajax.reload();
             abp.notify.success(l('IisSites:Started'));
+        }).catch(function () {
+            dataTable.ajax.reload();
         });
     });
 
@@ -92,6 +103,8 @@ $(function () {
         appManager.application.iisSites.iisSite.stop(id).then(function () {
             dataTable.ajax.reload();
             abp.notify.success(l('IisSites:Stopped'));
+        }).catch(function () {
+            dataTable.ajax.reload();
         });
     });
 

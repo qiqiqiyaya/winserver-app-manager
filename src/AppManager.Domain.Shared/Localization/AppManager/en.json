@@ -8,6 +8,7 @@
     "Menu:IisSites": "IIS Sites",
     "Menu:IisSiteList": "Site Management",
     "Menu:IisSiteBackup": "Backup & Restore",
+    "Menu:IisInstances": "IIS Instances",
     "Menu:WindowsServices": "Windows Services",
     "Menu:WindowsServiceList": "Service Management",
     "Menu:WindowsServiceBackup": "Backup & Restore",
@@ -26,6 +27,10 @@
     "Permission:IisSites.ManagePermissions": "Manage NTFS Permissions",
     "Permission:IisSites.Backup": "Backup Site",
     "Permission:IisSites.Restore": "Restore Site",
+    "Permission:IisInstances": "IIS Instance Management",
+    "Permission:IisInstances.Create": "Create Instance",
+    "Permission:IisInstances.Edit": "Edit Instance",
+    "Permission:IisInstances.Delete": "Delete Instance",
     "Permission:WindowsServices": "Windows Service Management",
     "Permission:WindowsServices.Create": "Create Service",
     "Permission:WindowsServices.Edit": "Edit Service",
@@ -99,6 +104,12 @@
     "CreateAsNew": "Create as New",
     "RestoreSnapshotFirst": "Create snapshot before restore (recommended)",
     "RestoreWarning": "Warning: Restore will modify IIS/Windows Service configuration. This operation cannot be undone.",
-    "ConfirmRestore": "Confirm Restore"
+    "ConfirmRestore": "Confirm Restore",
+    "IisInstances:Title": "IIS Instance Management",
+    "IisInstances:Name": "Instance Name",
+    "IisInstances:ConfigPath": "Config File Path",
+    "IisInstances:Status": "Status",
+    "IisInstances:Create": "Create Instance",
+    "IisInstances:SystemDefault": "System Default"
   }
 }

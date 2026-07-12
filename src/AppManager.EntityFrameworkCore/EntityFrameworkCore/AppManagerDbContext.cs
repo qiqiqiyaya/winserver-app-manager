@@ -35,6 +35,7 @@ public class AppManagerDbContext :
     public DbSet<WindowsServiceEntity> WindowsServices { get; set; }
     public DbSet<IisSiteBackup> IisSiteBackups { get; set; }
     public DbSet<WindowsServiceBackup> WindowsServiceBackups { get; set; }
+    public DbSet<IisInstance> IisInstances { get; set; }
 
     #region Entities from the modules
 
@@ -91,5 +92,6 @@ public class AppManagerDbContext :
         builder.ApplyConfiguration(new WindowsServiceConfiguration());
         builder.ApplyConfiguration(new IisSiteBackupConfiguration());
         builder.ApplyConfiguration(new WindowsServiceBackupConfiguration());
+        builder.ApplyConfiguration(new IisInstanceConfiguration());
     }
 }

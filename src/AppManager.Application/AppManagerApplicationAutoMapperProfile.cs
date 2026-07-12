@@ -18,6 +18,8 @@ public class AppManagerApplicationAutoMapperProfile : Profile
     {
         /* IIS 站点映射 */
         CreateMap<IisSiteEntity, IisSiteDto>()
+            .ForMember(d => d.IisInstanceName, o => o.MapFrom(s =>
+                s.IisInstance != null ? s.IisInstance.Name : null))
             .ForMember(d => d.Bindings, o => o.MapFrom(s =>
                 s.BindingsJson != null
                     ? JsonSerializer.Deserialize<List<SiteBindingDto>>(s.BindingsJson)
@@ -67,6 +69,11 @@ public class AppManagerApplicationAutoMapperProfile : Profile
         /* 备份映射 */
         CreateMap<IisSiteBackup, IisSiteBackupDto>();
         CreateMap<WindowsServiceBackup, WindowsServiceBackupDto>();
+
+        /* IIS 实例映射 */
+        CreateMap<IisInstance, IisInstanceDto>();
+        CreateMap<CreateIisInstanceDto, IisInstance>()
+            .ForMember(d => d.Id, o => o.Ignore());
 
         /* 值对象映射 */
         CreateMap<SiteBindingDto, SiteBinding>().ReverseMap();

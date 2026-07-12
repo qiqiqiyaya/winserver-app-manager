@@ -22,6 +22,9 @@
     </abp-card-header>
     <abp-card-body>
         <abp-row class="mb-3">
+            <abp-column size-md="_3">
+                <select id="InstanceFilter" class="form-select" asp-items="Model.InstanceList"></select>
+            </abp-column>
             <abp-column size-md="_4">
                 <input id="FilterInput" class="form-control" placeholder="@L["IisSites:SearchPlaceholder"]" />
             </abp-column>

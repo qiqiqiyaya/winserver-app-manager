@@ -1,26 +1,47 @@
-# Codemap Generation Report — 2026-07-11
+# Codemap Diff Report — 2026-07-12
 
-## Summary
-- Codemaps generated: 5 (architecture.md, backend.md, frontend.md, data.md, dependencies.md)
-- No previous codemaps existed — this is the initial generation.
-- No diff comparison needed.
+## Scan Summary
+- Files scanned: 698 (src/ + test/)
+- Previous scan: 139 (2026-07-11)
+- Previous codemaps: all 5 exist (architecture, backend, frontend, data, dependencies)
 
-## Files Scanned
-- Source files (src/): 139 .cs/.cshtml files across 7 projects
-- Test files (test/): 28 .cs files across 5 test projects
-- Existing docs: 3 (architecture.md, requirements.md, ui-prototype.md)
+## Changes Detected
 
-## Architecture Notes
-- **Stack**: .NET 8 + ABP Framework 8.3.4 + ASP.NET Core MVC + EF Core + SQL Server
-- **Domain**: IisSite, WindowsService, IisSiteBackup, WindowsServiceBackup (4 entities)
-- **AppServices**: 6 (IisSite, WindowsService, IisSiteBackup, WindowsServiceBackup, SystemLog, AuditLog)
-- **Domain Services**: 4 (IIisManager, IWindowsServiceManager, IIisBackupService, IWindowsServiceBackupService)
-- **Razor Pages**: 13 (5 IIS sites, 3 Windows services, 2 backups, system logs, audit logs, permissions, home)
-- **Permissions**: 20 defined constants
+### Architecture (HIGH — 40%+ change)
+- Domain services relocated: implementations moved from `Application/Services/` to `Domain/` with per-domain folder organization
+- `AppManager.Services` namespace eliminated — split into `AppManager.IisSite`, `AppManager.WindowsService`, `AppManager.Backups`
+- Architecture diagram updated: Domain layer now shows domain service implementations
+- Domain service organization table added showing entity/interface/implementation per folder
 
-## Staleness Notes
-- `docs/architecture.md` — Already exists, detailed, covers ABP arch. Codemap version is leaner.
-- `docs/requirements.md` — Not scanned.
-- `docs/ui-prototype.md` — Not scanned.
-- SystemLogAppService and AuditLogAppService are stubs (not implemented).
-- Only 1 migration exists (Initial).
+### Backend (HIGH — 30%+ change)
+- Updated Service → Repository mapping table with new file paths (domain services now point to Domain/)
+- Added error handling flow section (BusinessException → ABP error format → client)
+- Key Files table: updated paths from Application/Services/ → Domain/IisSite/, Domain/WindowsService/, Domain/Backups/
+
+### Dependencies (MEDIUM)
+- NuGet packages `Microsoft.Web.Administration` and `System.ServiceProcess.ServiceController` now listed under Domain project (was Application)
+- Added constraint: domain services both interfaces + implementations in Domain project
+
+### Frontend (LOW — no structural changes)
+- Date and file count only
+
+### Data (LOW — no structural changes)
+- Date and file count only
+
+## New Dependencies Detected
+None — packages moved between projects only (Application → Domain)
+
+## Architecture Changes
+1. **Domain layer now owns its service implementations** — ABP DDD layering compliance
+2. **Per-domain folder organization** — `IisSite/`, `WindowsService/`, `Backups/` each contain entity + interface + implementation
+3. **Error propagation** — Exceptions now surface as `BusinessException` to clients instead of being silently swallowed
+
+## Staleness Warnings
+None — all documentation is current.
+
+## Files Modified
+- docs/CODEMAPS/architecture.md — full rewrite
+- docs/CODEMAPS/backend.md — full rewrite
+- docs/CODEMAPS/dependencies.md — package location updates
+- docs/CODEMAPS/frontend.md — metadata only
+- docs/CODEMAPS/data.md — metadata only

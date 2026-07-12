@@ -412,6 +412,117 @@ namespace AppManager.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "App_IisSiteBackups",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SiteName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    BackupData = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_App_IisSiteBackups", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "App_IisSites",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SiteName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    PhysicalPath = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
+                    Port = table.Column<int>(type: "int", nullable: true),
+                    BindingsJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AppPoolName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    AppPoolConfigJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubApplicationsJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VirtualDirectoriesJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NtfsPermissionsJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_App_IisSites", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "App_WindowsServiceBackups",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ServiceName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    DisplayName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    BackupData = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_App_WindowsServiceBackups", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "App_WindowsServices",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ServiceName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    DisplayName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
+                    ExecutablePath = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
+                    StartType = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
+                    Account = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    FailureActionsJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DependenciesJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_App_WindowsServices", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OpenIddictApplications",
                 columns: table => new
                 {
@@ -1021,6 +1132,38 @@ namespace AppManager.Migrations
                 column: "UserName");
 
             migrationBuilder.CreateIndex(
+                name: "IX_App_IisSiteBackups_CreatedAt",
+                table: "App_IisSiteBackups",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_App_IisSiteBackups_SiteName",
+                table: "App_IisSiteBackups",
+                column: "SiteName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_App_IisSites_SiteName",
+                table: "App_IisSites",
+                column: "SiteName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_App_WindowsServiceBackups_CreatedAt",
+                table: "App_WindowsServiceBackups",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_App_WindowsServiceBackups_ServiceName",
+                table: "App_WindowsServiceBackups",
+                column: "ServiceName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_App_WindowsServices_ServiceName",
+                table: "App_WindowsServices",
+                column: "ServiceName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictApplications_ClientId",
                 table: "OpenIddictApplications",
                 column: "ClientId");
@@ -1125,6 +1268,18 @@ namespace AppManager.Migrations
 
             migrationBuilder.DropTable(
                 name: "AbpUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "App_IisSiteBackups");
+
+            migrationBuilder.DropTable(
+                name: "App_IisSites");
+
+            migrationBuilder.DropTable(
+                name: "App_WindowsServiceBackups");
+
+            migrationBuilder.DropTable(
+                name: "App_WindowsServices");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictScopes");

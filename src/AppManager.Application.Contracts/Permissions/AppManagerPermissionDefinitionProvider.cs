@@ -29,6 +29,15 @@ public class AppManagerPermissionDefinitionProvider : PermissionDefinitionProvid
         iisSitesPermission.AddChild(
             AppManagerPermissions.IisSites.Restore, L("Permission:IisSites.Restore"));
 
+        var iisInstancesPermission = appManagerGroup.AddPermission(
+            AppManagerPermissions.IisInstances.Default, L("Permission:IisInstances"));
+        iisInstancesPermission.AddChild(
+            AppManagerPermissions.IisInstances.Create, L("Permission:IisInstances.Create"));
+        iisInstancesPermission.AddChild(
+            AppManagerPermissions.IisInstances.Edit, L("Permission:IisInstances.Edit"));
+        iisInstancesPermission.AddChild(
+            AppManagerPermissions.IisInstances.Delete, L("Permission:IisInstances.Delete"));
+
         var windowsServicesPermission = appManagerGroup.AddPermission(
             AppManagerPermissions.WindowsServices.Default, L("Permission:WindowsServices"));
         windowsServicesPermission.AddChild(

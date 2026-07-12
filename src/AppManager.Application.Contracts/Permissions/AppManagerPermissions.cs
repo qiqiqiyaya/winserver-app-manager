@@ -17,6 +17,14 @@ public static class AppManagerPermissions
         public const string Restore = Default + ".Restore";
     }
 
+    public static class IisInstances
+    {
+        public const string Default = GroupName + ".IisInstances";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+
     public static class WindowsServices
     {
         public const string Default = GroupName + ".WindowsServices";

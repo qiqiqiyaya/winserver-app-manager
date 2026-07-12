@@ -1,0 +1,34 @@
+@page
+@model AppManager.Web.Pages.IisInstances.IndexModel
+@using Microsoft.Extensions.Localization
+@using AppManager.Localization
+@inject IStringLocalizer<AppManagerResource> L
+
+@section scripts {
+    <abp-script src="/Pages/IisInstances/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["IisInstances:Title"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                <abp-button id="CreateInstanceButton" text="@L["IisInstances:Create"].Value" icon="plus" button-type="Primary" />
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="IisInstancesTable" class="nowrap">
+            <thead>
+                <tr>
+                    <th>@L["IisInstances:Name"]</th>
+                    <th>@L["IisInstances:ConfigPath"]</th>
+                    <th>@L["IisInstances:Status"]</th>
+                    <th>@L["Actions"]</th>
+                </tr>
+            </thead>
+        </abp-table>
+    </abp-card-body>
+</abp-card>
