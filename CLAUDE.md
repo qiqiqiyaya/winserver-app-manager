@@ -120,3 +120,13 @@ AppManager.*
 - `docs/requirements.md` — 完整需求文档
 - `docs/architecture.md` — 技术架构详情
 - `docs/ui-prototype.md` — UI 原型图（所有页面的 ASCII 布局）
+- `docs/ENV.md` — 环境配置说明
+- `docs/CONTRIBUTING.md` — 贡献指南
+- `docs/RUNBOOK.md` — 运维手册
+- `docs/rules/modal-page-creation-checklist.md` — ABP 模态框创建规范（Layout=null、ModelState、ModalManager）
+- `docs/rules/database-migration-command.md` — 数据库迁移命令触发词
+- `docs/CODEMAPS/architecture.md` — 系统架构 codemap
+- `docs/CODEMAPS/backend.md` — 后端结构 codemap
+- `docs/CODEMAPS/frontend.md` — 前端结构 codemap
+- `docs/CODEMAPS/data.md` — 数据层 codemap
+- `docs/CODEMAPS/dependencies.md` — 依赖关系 codemap

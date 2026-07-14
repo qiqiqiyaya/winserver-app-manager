@@ -45,6 +45,7 @@ public class ManageModel : AppManagerPageModel
 
     public async Task<IActionResult> OnPostAddBindingAsync()
     {
+        if (!ModelState.IsValid) { await LoadAllAsync(); return Page(); }
         await _iisSiteAppService.AddBindingAsync(Id, NewBinding);
         return RedirectToPage(new { Id });
     }
@@ -60,6 +61,7 @@ public class ManageModel : AppManagerPageModel
 
     public async Task<IActionResult> OnPostAddSubAppAsync()
     {
+        if (!ModelState.IsValid) { await LoadAllAsync(); return Page(); }
         await _iisSiteAppService.AddSubApplicationAsync(Id, NewSubApp);
         return RedirectToPage(new { Id });
     }
@@ -72,6 +74,7 @@ public class ManageModel : AppManagerPageModel
 
     public async Task<IActionResult> OnPostAddVDirAsync()
     {
+        if (!ModelState.IsValid) { await LoadAllAsync(); return Page(); }
         await _iisSiteAppService.AddVirtualDirectoryAsync(Id, NewVDir);
         return RedirectToPage(new { Id });
     }
@@ -84,6 +87,7 @@ public class ManageModel : AppManagerPageModel
 
     public async Task<IActionResult> OnPostUpdateAppPoolAsync()
     {
+        if (!ModelState.IsValid) { await LoadAllAsync(); return Page(); }
         await _iisSiteAppService.UpdateAppPoolConfigAsync(Id, EditAppPool);
         return RedirectToPage(new { Id });
     }

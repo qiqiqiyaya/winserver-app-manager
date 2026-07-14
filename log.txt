@@ -29,3 +29,5 @@ architecture.md 与 architecture.md 、ui-prototype.md更新
 2.需要编写程序来帮我自动执行升级、备份、还原，以及部分文档性管理
 3.我需要一个更加统一的工具来实现站点、service的管理工作
 4.因为现在站点、service越来越多了，需要管理工具来辅助管理
+
+种子管理员：admin / 1q2w3E*

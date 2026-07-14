@@ -3,6 +3,9 @@
 @using Microsoft.Extensions.Localization
 @using AppManager.Localization
 @inject IStringLocalizer<AppManagerResource> L
+@{
+    Layout = null;
+}
 
 <abp-modal size="Large">
     <abp-modal-header title="@L["IisInstances:Create"].Value"></abp-modal-header>

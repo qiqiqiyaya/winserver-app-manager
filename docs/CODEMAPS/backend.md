@@ -1,4 +1,4 @@
-<!-- Generated: 2026-07-12 | Files scanned: 698 | Token estimate: ~950 -->
+<!-- Generated: 2026-07-14 | Files scanned: ~700 | Token estimate: ~950 -->
 
 # Backend Architecture
 

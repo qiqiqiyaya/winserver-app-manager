@@ -17,6 +17,11 @@ public class CreateModalModel : AppManagerPageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         await _svc.CreateAsync(Input);
         return NoContent();
     }

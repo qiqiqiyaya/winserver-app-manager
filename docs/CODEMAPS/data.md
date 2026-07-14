@@ -1,4 +1,4 @@
-<!-- Generated: 2026-07-12 | Files scanned: 698 | Token estimate: ~850 -->
+<!-- Generated: 2026-07-14 | Files scanned: ~700 | Token estimate: ~850 -->
 
 # Data Architecture
 
@@ -89,7 +89,7 @@
 
 | Migration | Date | Status |
 |---|---|---|
-| `20260709063542_Initial` | 2026-07-09 | Applied (single migration) |
+| `20260714135007_Initial` | 2026-07-14 | Applied (single consolidated migration) |
 
 ## Entity Relationships
 

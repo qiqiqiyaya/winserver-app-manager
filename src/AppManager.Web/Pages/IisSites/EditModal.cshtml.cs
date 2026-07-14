@@ -35,6 +35,11 @@ public class EditModalModel : AppManagerPageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         await _iisSiteAppService.UpdateAsync(Id, Input);
         return NoContent();
     }
