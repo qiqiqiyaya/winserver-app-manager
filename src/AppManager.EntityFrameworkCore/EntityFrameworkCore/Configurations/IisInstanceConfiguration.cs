@@ -14,7 +14,7 @@ public class IisInstanceConfiguration : IEntityTypeConfiguration<IisInstance>
 
         builder.Property(x => x.Name).IsRequired().HasMaxLength(256);
         builder.Property(x => x.ConfigPath).IsRequired().HasMaxLength(1024);
-        builder.HasIndex(x => x.ConfigPath).IsUnique();
+        builder.HasIndex(x => x.ConfigPath).IsClustered(false);
         builder.Property(x => x.Status).HasMaxLength(32);
     }
 }
