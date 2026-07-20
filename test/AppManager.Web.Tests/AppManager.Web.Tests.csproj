@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -16,9 +16,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.54" />
+    <PackageReference Include="Scriban" Version="7.2.5" />
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="3.53.3" />
     <ProjectReference Include="..\AppManager.Application.Tests\AppManager.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\AppManager.Web\AppManager.Web.csproj" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="8.3.4" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="10.5.0" />
     <ProjectReference Include="..\AppManager.EntityFrameworkCore.Tests\AppManager.EntityFrameworkCore.Tests.csproj" />
   </ItemGroup>
 

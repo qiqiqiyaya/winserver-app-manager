@@ -110,6 +110,7 @@
     "IisInstances:ConfigPath": "配置文件路径",
     "IisInstances:Status": "状态",
     "IisInstances:Create": "创建实例",
-    "IisInstances:SystemDefault": "系统默认"
+    "IisInstances:SystemDefault": "系统默认",
+    "IisInstances:ViewSites": "查看站点"
   }
 }

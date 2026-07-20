@@ -56,6 +56,14 @@ $(function () {
         })
     );
 
+    // 从路由路径中获取 iisInstanceId（路由模板：/IisSites/{iisInstanceId:guid?}），自动选中筛选器
+    var pathParts = window.location.pathname.split('/').filter(Boolean);
+    var instanceId = pathParts.length >= 3 ? pathParts[2] : null;
+    if (instanceId && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}$/i.test(instanceId)) {
+        $('#InstanceFilter').val(instanceId);
+        dataTable.ajax.reload();
+    }
+
     $('#InstanceFilter').on('change', function () {
         dataTable.ajax.reload();
     });

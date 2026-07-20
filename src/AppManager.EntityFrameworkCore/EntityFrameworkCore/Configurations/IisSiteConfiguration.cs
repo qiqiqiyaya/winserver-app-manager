@@ -21,11 +21,6 @@ public class IisSiteConfiguration : IEntityTypeConfiguration<IisSite.IisSite>
 
         builder.HasIndex(x => new { x.IisInstanceId, x.SiteName }).IsUnique();
 
-        builder.HasOne(x => x.IisInstance)
-            .WithMany()
-            .HasForeignKey(x => x.IisInstanceId)
-            .OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Restrict);
-
         builder.Property(x => x.BindingsJson).HasColumnType("nvarchar(max)");
         builder.Property(x => x.AppPoolConfigJson).HasColumnType("nvarchar(max)");
         builder.Property(x => x.SubApplicationsJson).HasColumnType("nvarchar(max)");

@@ -1,29 +1,23 @@
-﻿using AppManager.Data.LocalDbSafeDeleter;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Web.Administration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 
-namespace AppManager.Data
+namespace AppManager.DbMigrator
 {
     public class AppManagerDbDeleteDbService : ITransientDependency
     {
         private readonly IConfiguration _config;
         public ILogger<AppManagerDbDeleteDbService> Logger { get; set; }
+        private readonly LocalDbDeleter _localDbDeleter;
 
-        public AppManagerDbDeleteDbService(IConfiguration config)
+        public AppManagerDbDeleteDbService(IConfiguration config, LocalDbDeleter localDbDeleter)
         {
-            _config=config;
+            _config = config;
+            _localDbDeleter = localDbDeleter;
         }
 
-        public Task  DoAsync(string[] args)
+        public void Do()
         {
             Logger.LogInformation("=== LocalDB 安全删除工具 ===");
 
@@ -34,23 +28,17 @@ namespace AppManager.Data
             Logger.LogInformation($"目标数据库: {dbName}");
             Logger.LogInformation("====================================");
 
-            // 确认操作
-            Logger.LogInformation("⚠️  确认删除该数据库？(输入 YES 确认): ");
-
             // 执行安全删除
-            bool success = LocalDbDeleter.DeleteLocalDatabaseSafely(connectionString);
+            bool success = _localDbDeleter.DeleteLocalDatabaseSafely(connectionString);
 
             if (success)
             {
-                Logger.LogInformation("\n✅ 操作成功完成。");
+                Logger.LogInformation("操作成功完成。");
             }
             else
             {
-                Logger.LogInformation("\n❌ 操作失败，请查看上方错误信息。");
+                Logger.LogInformation("操作失败，请查看上方错误信息。");
             }
-
-            Logger.LogInformation("\n按任意键退出...");
-            Console.ReadKey();
         }
 
         /// <summary>

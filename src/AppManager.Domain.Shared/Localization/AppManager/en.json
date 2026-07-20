@@ -110,6 +110,7 @@
     "IisInstances:ConfigPath": "Config File Path",
     "IisInstances:Status": "Status",
     "IisInstances:Create": "Create Instance",
-    "IisInstances:SystemDefault": "System Default"
+    "IisInstances:SystemDefault": "System Default",
+    "IisInstances:ViewSites": "View Sites"
   }
 }

@@ -37,6 +37,7 @@ $(function () {
                     orderable: false,
                     render: function (data) {
                         return '<div class="btn-group btn-group-sm">'
+                            + '<a class="btn btn-sm btn-info" href="' + abp.appPath + 'IisSites/' + data + '" title="' + l('IisInstances:ViewSites') + '"><i class="fa fa-globe"></i></a>'
                             + '<button class="btn btn-sm btn-danger delete-btn" data-id="' + data + '" title="' + l('Delete') + '"><i class="fa fa-trash"></i></button>'
                             + '</div>';
                     }

@@ -17,8 +17,7 @@ public class IisSite : FullAuditedAggregateRoot<Guid>
     public string? NtfsPermissionsJson { get; set; }
 
     /// <summary>
-    /// 所属 IIS 实例
+    /// 所属 IIS 实例 ID（通过 ID 引用，无导航属性）
     /// </summary>
     public Guid IisInstanceId { get; set; }
-    public IisInstance? IisInstance { get; set; }
 }

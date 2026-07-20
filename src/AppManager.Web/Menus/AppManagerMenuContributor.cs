@@ -43,6 +43,11 @@ public class AppManagerMenuContributor : IMenuContributor
             order: 1
         );
         iisGroup.AddItem(new ApplicationMenuItem(
+            "IisSiteList",
+            l["Menu:IisSiteList"],
+            "~/IisSites"
+        ));
+        iisGroup.AddItem(new ApplicationMenuItem(
             "IisInstances",
             l["Menu:IisInstances"],
             "~/IisInstances"

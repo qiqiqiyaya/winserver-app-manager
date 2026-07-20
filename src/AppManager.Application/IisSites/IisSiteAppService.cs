@@ -38,6 +38,22 @@ public class IisSiteAppService : AppManagerAppService, IIisSiteAppService
         return instance.ConfigPath;
     }
 
+    private async Task PopulateInstanceNamesAsync(List<IisSiteDto> dtos)
+    {
+        var instanceIds = dtos.Select(d => d.IisInstanceId).Distinct().ToList();
+        if (instanceIds.Count == 0) return;
+
+        var instances = (await _instanceRepository.GetQueryableAsync())
+            .Where(i => instanceIds.Contains(i.Id))
+            .ToDictionary(i => i.Id, i => i.Name);
+
+        foreach (var dto in dtos)
+        {
+            if (instances.TryGetValue(dto.IisInstanceId, out var name))
+                dto.IisInstanceName = name;
+        }
+    }
+
     public async Task<PagedResultDto<IisSiteDto>> GetListAsync(GetIisSiteListDto input)
     {
         var queryable = await _siteRepository.GetQueryableAsync();
@@ -52,15 +68,22 @@ public class IisSiteAppService : AppManagerAppService, IIisSiteAppService
         var items = queryable.OrderBy(s => s.SiteName)
             .Skip(input.SkipCount).Take(input.MaxResultCount).ToList();
 
-        return new PagedResultDto<IisSiteDto>(
-            totalCount,
-            ObjectMapper.Map<List<IisSiteEntity>, List<IisSiteDto>>(items));
+        var dtos = ObjectMapper.Map<List<IisSiteEntity>, List<IisSiteDto>>(items);
+        await PopulateInstanceNamesAsync(dtos);
+
+        return new PagedResultDto<IisSiteDto>(totalCount, dtos);
     }
 
     public async Task<IisSiteDto> GetAsync(Guid id)
     {
         var entity = await _siteRepository.GetAsync(id);
-        return ObjectMapper.Map<IisSiteEntity, IisSiteDto>(entity);
+        var dto = ObjectMapper.Map<IisSiteEntity, IisSiteDto>(entity);
+
+        var instance = await _instanceRepository.FindAsync(i => i.Id == entity.IisInstanceId);
+        if (instance != null)
+            dto.IisInstanceName = instance.Name;
+
+        return dto;
     }
 
     [Authorize(AppManagerPermissions.IisSites.Create)]
